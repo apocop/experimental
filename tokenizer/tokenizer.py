@@ -49,7 +49,7 @@ class Tokenizer(object):
             if preprocessed_token:
                 self.add_token(preprocessed_token)
 
-        return Document(self.tokens)
+        return Document(self.tokens, text)
 
 
     def add_exceptions(self, preprocessed_token):
@@ -100,8 +100,9 @@ class Tokenizer(object):
 class Document(object):
     """Container Object for Tokens."""
  
-    def __init__(self, tokens):
+    def __init__(self, tokens, text):
         self.tokens = tuple(tokens)
+        self.text = text
 
     def __len__(self):
         return len(self.tokens)
@@ -130,3 +131,5 @@ processed_text = tokenizer.tokenize(s)
 print(f'Number of tokens: {len(processed_text)}')
 for token in processed_text.tokens:
     print(token)
+
+print(processed_text.text)
