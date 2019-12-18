@@ -18,7 +18,8 @@ class Tokenizer(object):
             'don\'t' : ('do', 'n\'t'),
             'doen\'t': ('does', 'n\'t'),
             'haven\'t': ('have', 'n\'t'),
-            ':)': (':)'),
+            ':)': (':)',),
+            ':(': (':(',),
         }
 
         self.token_cache = []
@@ -125,7 +126,7 @@ s = "'I don't have an apple,' he said."
 s = """
 These aren’t trivial numbers. Compared to placebo, 20 more people were dying every year when taking these two supplements. Over the four years of the trial, that equates to 80 more deaths. As the authors wrote at the time, “The present findings provide ample grounds to discourage use of supplemental beta-carotene and the combination of beta-carotene and vitamin A.”
 """
-s = 'I love you. :) Not!!!'
+s = 'I love you. :) Not!!! :('
 tokenizer = Tokenizer()
 processed_text = tokenizer.tokenize(s)
 
