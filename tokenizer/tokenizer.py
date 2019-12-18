@@ -10,6 +10,9 @@ class Token(object):
     def __repr__(self):
         return f'Token: {self.token}'
 
+    def __len__(self):
+        return len(self.token)
+
 
 class Tokenizer(object):
     "Tokenizes a string and returns a Document of Tokens."
@@ -131,5 +134,3 @@ processed_text = tokenizer.tokenize(s)
 print(f'Number of tokens: {len(processed_text)}')
 for token in processed_text.tokens:
     print(token)
-
-print(processed_text.text)
