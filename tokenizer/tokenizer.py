@@ -24,7 +24,7 @@ class Tokenizer(object):
 
         # English specific customizations.
         self.inital_punctuation = ('\'', '"')
-        self.final_punctuation = ('\'', '"', '!', '?', '!', '/', '\\', '.', ',')
+        self.final_punctuation = ('\'', '"', '!', '?', '.', ',')
         self.token_exceptions = {
             'don\'t' : ('do', 'n\'t'),
             'doen\'t': ('does', 'n\'t'),
@@ -44,13 +44,12 @@ class Tokenizer(object):
 
             if preprocessed_token in self.token_exceptions:
                 self.add_exceptions(preprocessed_token)
-                continue
+            else:
+                preprocessed_token = self.split_prefix(preprocessed_token)
+                preprocessed_token = self.split_suffix(preprocessed_token)
 
-            preprocessed_token = self.split_prefix(preprocessed_token)
-            preprocessed_token = self.split_suffix(preprocessed_token)
-
-            if preprocessed_token:
-                self.add_token(preprocessed_token)
+                if preprocessed_token:
+                    self.add_token(preprocessed_token)
 
         return Document(self.tokens, text)
 
@@ -87,8 +86,8 @@ class Tokenizer(object):
                 token = self.pop_from_token_cache()
                 if preprocessed_token in self.token_exceptions:
                     self.add_exceptions(preprocessed_token)
-                    continue
-                self.add_token(token)
+                else:
+                    self.add_token(token)
             return None
         else:
             return preprocessed_token
@@ -112,12 +111,6 @@ class Document(object):
 
 
 # Temporary Tests.
-s = "Apple is looking at buying U.K. startup for $ 1billion."
-s = '"Apple'
-s = "'I don't have an apple.' Apple is looking at buying U.K. startup for $1 billion."
-s = "'I don't have an apple.'"
-s = "'I don't have an apple,' he said."
-
 s = """
 These aren’t trivial numbers.
 Compared to placebo, 20 more people were dying every year when taking these
