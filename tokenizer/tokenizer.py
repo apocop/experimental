@@ -39,9 +39,7 @@ class Tokenizer(object):
 
     def tokenize(self, text):
         """Go through the tokenization pipeline to produce tokens."""
-
         for preprocessed_token in text.split():
-
             if preprocessed_token in self.token_exceptions:
                 self.add_exceptions(preprocessed_token)
             else:
@@ -58,7 +56,6 @@ class Tokenizer(object):
         """Check to see if the token has a hard coded tokenization."""
         for token in self.token_exceptions.get(preprocessed_token):
             self.add_token(token)
-
 
     def split_prefix(self, preprocessed_token):
         "Split initial punctuation."
@@ -109,6 +106,9 @@ class Document(object):
     def __len__(self):
         return len(self.tokens)
 
+    def __iter__(self):
+        return iter(self.tokens)
+
 
 # Temporary Tests.
 s = """
@@ -119,11 +119,11 @@ deaths. As the authors wrote at the time, “The present findings provide
 ample grounds to discourage use of supplemental beta-carotene and the
 combination of beta-carotene and vitamin A.”
 """
-s = 'I love you. :) Not!!! :( You don\'t love me?!?!'
+s = 'I love you. :) Not!!! :('
 
 tokenizer = Tokenizer()
 processed_text = tokenizer.tokenize(s)
 
 print(f'Number of tokens: {len(processed_text)}')
-for token in processed_text.tokens:
+for token in processed_text:
     print(token)
