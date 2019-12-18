@@ -18,7 +18,7 @@ class Tokenizer(object):
             'don\'t' : ('do', 'n\'t'),
             'doen\'t': ('does', 'n\'t'),
             'haven\'t': ('have', 'n\'t'),
-            ':)': (':)',),
+            ':)': (':)'),
         }
 
         self.token_cache = []
@@ -68,6 +68,8 @@ class Tokenizer(object):
             split_token = preprocessed_token[:-1]
 
             self.add_to_token_cache(suffix)
+            #self.split_suffix(preprocessed_token[:-1])
+            print(f'preprocessed token: {preprocessed_token[:-1]}')
 
             if split_token[-1] in self.final_punctuation:
                 self.split_suffix(split_token)
@@ -95,6 +97,7 @@ class Tokenizer(object):
 
     def add_to_token_cache(self, token):
         self.token_cache.append(token)
+        print(self.token_cache)
 
     def pop_from_token_cache(self):
         return self.token_cache.pop()
