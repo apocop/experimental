@@ -119,7 +119,7 @@ deaths. As the authors wrote at the time, “The present findings provide
 ample grounds to discourage use of supplemental beta-carotene and the
 combination of beta-carotene and vitamin A.”
 """
-s = 'I love you. :) Not!!! :('
+s = 'I love you. :) Not!!! :( You don\'t love me?!?!'
 
 tokenizer = Tokenizer()
 processed_text = tokenizer.tokenize(s)
