@@ -11,6 +11,12 @@ exceptions = {
 tokens = []
 
 def tokenize(text):
+
+    def tokenize_group(match):
+        "Tokenize two groups from match object."
+        tokenize(match.group(1))
+        tokenize(match.group(2))
+
     for span in text.split():
         # Exceptions.
         if span in exceptions:
@@ -23,22 +29,18 @@ def tokenize(text):
             all_punctuation = re.match(tokenizer_rules.get('ALL_PUNCTUATION_TOKEN'), span, re.IGNORECASE)
             currency_amount = re.match(tokenizer_rules.get('CURRENCY_AMOUNT_TOKEN'), span, re.IGNORECASE)
 
-            # Intial Punctuation.
+            #Intial Punctuation.
             if initial_punctuation:
-                tokenize(initial_punctuation.group(1))
-                tokenize(initial_punctuation.group(2))
+                tokenize_group(initial_punctuation)
             # Final Punctuation.
             elif final_punctuation:
-                tokenize(final_punctuation.group(1))
-                tokenize(final_punctuation.group(2))
+                tokenize_group(final_punctuation)
             # All Punctuation.
             elif all_punctuation:
-                tokenize(all_punctuation.group(1))
-                tokenize(all_punctuation.group(2))
+                tokenize_group(all_punctuation)
             # Currency amount.
             elif currency_amount:
-                tokenize(currency_amount.group(1))
-                tokenize(currency_amount.group(2))
+                tokenize_group(currency_amount)
             else:
                 tokens.append(span)
     return tokens
