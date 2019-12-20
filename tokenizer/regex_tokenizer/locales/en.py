@@ -11,9 +11,11 @@ Examples:
 2. "I ⟶ " I
 3. said," ⟶ said , "
 """
-def add_boundary(sequence):
-    # Forces regex to match the entire string.
-    return BOS + sequence + EOS
+
+import re
+
+def compile_rule(rule):
+    return re.compile(BOS + rule + EOS, re.IGNORECASE)
 
 def group(group):
     # Creates regex groups.
@@ -55,4 +57,4 @@ rules_to_export = {
 }
 
 # Rules with word boundaries.
-tokenizer_rules = {k:add_boundary(v) for (k,v) in rules_to_export.items()}
+tokenizer_rules = {k:compile_rule(v) for (k,v) in rules_to_export.items()}
