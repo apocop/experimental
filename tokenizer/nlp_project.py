@@ -1,6 +1,4 @@
-from tokenizer import tokenize
-
-
+from regex_tokenizer.tokenizer import tokenize
 
 
 # sample =  """"I don't like that dog", he remarked.""" 
