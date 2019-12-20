@@ -23,15 +23,24 @@ digits = '[0-9]'
 inital_punctuation = '[\'"]'
 final_punctuation = '[\',!?":.]'
 currency_symbol = '[$£¥]'
-boundary = '\B'
 
+BOS = '^'
+EOS = '$'
+PLUS = '+'
+STAR = "*"
+OPEN_GROUP = '('
+CLOSE_GROUP = ')'
 
 conditions = {
-    'inital_punctuation' : f'{boundary}({inital_punctuation})({alpha}+){boundary}',
-    'final_punctuation' : f'{boundary}({alpha}+)({final_punctuation}+){boundary}',
-    'all_punctuation' : f'{boundary}({final_punctuation})({final_punctuation}+){boundary}',
-    'currency_amount' : f'({currency_symbol})({digits}+\.?{digits}*)',
+    'inital_punctuation' : BOS + OPEN_GROUP + inital_punctuation + CLOSE_GROUP + OPEN_GROUP + alpha + PLUS + CLOSE_GROUP + EOS,
+    'inital_punctuation2' : f'{BOS}({inital_punctuation})({alpha}+){EOS}',
+    'final_punctuation' : f'{BOS}({alpha}+)({final_punctuation}+){EOS}',
+    'all_punctuation' : f'{BOS}({final_punctuation})({final_punctuation}+){EOS}',
+    'currency_amount' : '^([$£¥])([0-9]+\.?[0-9]{,2})$',
 }
+
+print(conditions['inital_punctuation'])
+print(conditions['inital_punctuation2'])
 
 exceptions = {
     "don't" : ['do', 'not']
