@@ -24,7 +24,7 @@ class Tokenizer(object):
 
         # English specific customizations.
         self.inital_punctuation = ('\'', '"')
-        self.final_punctuation = ('\'', '"', '!', '?', '.', ',')
+        self.final_punctuation = ('\'', '"', '!', '?', '.', ',', ':')
         self.token_exceptions = {
             'don\'t' : ('do', 'n\'t'),
             'doen\'t': ('does', 'n\'t'),
