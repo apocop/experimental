@@ -26,7 +26,7 @@ BOS = '^'
 EOS = '$'
 PLUS = '+'
 STAR = "*"
-PERIOD = '\.'
+PERIOD = r'\.'
 OPEN_GROUP = '('
 CLOSE_GROUP = ')'
 INITIAL_PUNCTUATION = '[\'"]'
@@ -56,30 +56,3 @@ rules_to_export = {
 
 # Rules with word boundaries.
 tokenizer_rules = {k:add_boundary(v) for (k,v) in rules_to_export.items()}
-
-
-
-alpha = '[A-Z]'
-digits = '[0-9]'
-inital_punctuation = '[\'"]'
-final_punctuation = '[\',!?":.]'
-currency_symbol = '[$£¥]'
-
-BOS = '^'
-EOS = '$'
-PLUS = '+'
-STAR = "*"
-OPEN_GROUP = '('
-CLOSE_GROUP = ')'
-
-conditions = {
-    'inital_punctuation' : f'{BOS}({inital_punctuation})({alpha}+){EOS}',
-    'final_punctuation' : f'{BOS}({alpha}+)({final_punctuation}+){EOS}',
-    'all_punctuation' : f'{BOS}({final_punctuation})({final_punctuation}+){EOS}',
-    'currency_amount' : r'^([$£¥])([0-9]+\.?[0-9]{,2})$',
-}
-
-print(conditions['inital_punctuation'])
-print(conditions['final_punctuation'])
-print(conditions['all_punctuation'])
-print(conditions['currency_amount'])

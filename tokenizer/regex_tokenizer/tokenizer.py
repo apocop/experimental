@@ -1,28 +1,8 @@
 import re
+from .locales.en import tokenizer_rules
 
 
-alpha = '[A-Z]'
-digits = '[0-9]'
-inital_punctuation = '[\'"]'
-final_punctuation = '[\',!?":.]'
-currency_symbol = '[$£¥]'
-
-BOS = '^'
-EOS = '$'
-PLUS = '+'
-STAR = "*"
-OPEN_GROUP = '('
-CLOSE_GROUP = ')'
-
-conditions = {
-    'inital_punctuation' : BOS + OPEN_GROUP + inital_punctuation + CLOSE_GROUP + OPEN_GROUP + alpha + PLUS + CLOSE_GROUP + EOS,
-    'inital_punctuation2' : f'{BOS}({inital_punctuation})({alpha}+){EOS}',
-    'final_punctuation' : f'{BOS}({alpha}+)({final_punctuation}+){EOS}',
-    'all_punctuation' : f'{BOS}({final_punctuation})({final_punctuation}+){EOS}',
-    'currency_amount' : '^([$£¥])([0-9]+\.?[0-9]{,2})$',
-}
-
-
+tokenizer_rules = tokenizer_rules
 exceptions = {
     "don't" : ['do', 'not']
     }
@@ -38,10 +18,10 @@ def tokenize(text):
                 tokenize(token)
         else:
             # Create Conditions.
-            initial_punctuation = re.match(conditions.get('inital_punctuation'), span, re.IGNORECASE)
-            final_punctuation = re.match(conditions.get('final_punctuation'), span, re.IGNORECASE)
-            all_punctuation = re.match(conditions.get('all_punctuation'), span, re.IGNORECASE)
-            currency_amount = re.match(conditions.get('currency_amount'), span, re.IGNORECASE)
+            initial_punctuation = re.match(tokenizer_rules.get('INITIAL_PUNCTUATION_TOKEN'), span, re.IGNORECASE)
+            final_punctuation = re.match(tokenizer_rules.get('FINAL_PUNCTUATION_TOKEN'), span, re.IGNORECASE)
+            all_punctuation = re.match(tokenizer_rules.get('ALL_PUNCTUATION_TOKEN'), span, re.IGNORECASE)
+            currency_amount = re.match(tokenizer_rules.get('CURRENCY_AMOUNT_TOKEN'), span, re.IGNORECASE)
 
             # Intial Punctuation.
             if initial_punctuation:
@@ -62,5 +42,3 @@ def tokenize(text):
             else:
                 tokens.append(span)
     return tokens
-
-
