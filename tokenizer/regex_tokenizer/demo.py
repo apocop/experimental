@@ -1,5 +1,6 @@
-from regex_tokenizer.tokenizer import tokenize
+# from regex_tokenizer.tokenizer.tokenizer import tokenize
 
+from RegTokenizer.tokenizer import tokenize
 
 # sample =  """"I don't like that dog", he remarked.""" 
 # sample = "Apple is looking at buying U.K. startup for $1 billion."
@@ -15,6 +16,8 @@ from regex_tokenizer.tokenizer import tokenize
 sample = 'I love you. :) Not!!! :('
 
 # sample = "U.K."
+sample = "shouldn't've"
+sample = "'Yes', he yelled!"
 
 
 

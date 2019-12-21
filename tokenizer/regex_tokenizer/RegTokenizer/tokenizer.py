@@ -1,8 +1,8 @@
 import re
-from .locales.en import tokenizer_rules
+from .grammars import en
 
 
-rules = tokenizer_rules
+rules = en.rules
 exceptions = {
     "don't" : ['do', 'not']
     }

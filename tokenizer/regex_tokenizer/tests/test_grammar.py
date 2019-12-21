@@ -1,4 +1,4 @@
-from locales import en
+from RegTokenizer.grammars import en
 
 tokenizer_rules = en.rules
 
@@ -11,5 +11,5 @@ def test_final_punctuation_rule():
 def test_all_punctuation_rule():
     assert tokenizer_rules['ALL_PUNCTUATION_TOKEN'].pattern == """^([',!?":.])([',!?":.]+)$"""
 
-def test__punctuation_rule():
+def test_punctuation_rule():
     assert tokenizer_rules['CURRENCY_AMOUNT_TOKEN'].pattern == r"""^([$£¥])([0-9]+\.?[0-9]{,2})$"""
