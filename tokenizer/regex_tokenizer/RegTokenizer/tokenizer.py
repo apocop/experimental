@@ -2,7 +2,7 @@ import re
 from .grammars import en
 
 
-rules = en.rules
+rules = en.RULES
 exceptions = {
     "don't" : ['do', 'not']
     }
